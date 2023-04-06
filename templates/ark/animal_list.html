@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-3xl mb-6">Animals</h1>
+    {% for animal in object_list %}
+        <div class="card compact card-side bg-base-100 shadow-xl mb-4">
+            {% if animal.picture %}
+                <figure class="avatar w-40 h-40"><img src="{{ animal.picture.url }}" alt="Movie"/></figure>
+            {% endif %}
+            <div class="card-body">
+                <h2 class="text-xl">{{ animal.name }} ({{ animal.gender }})
+                    <span class="block text-xs text-primary font-medium">{{ animal.species }}</span>
+                </h2>
+                <div class="card-actions justify-end">
+                    <a href="/ark/animals/{{ animal.id }}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <li>No animals yet.</li>
+    {% endfor %}
+{% endblock content %}
