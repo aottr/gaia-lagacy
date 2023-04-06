@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -27,7 +26,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(help_text='Enter the name of the species', max_length=150)),
-                ('suborder', models.IntegerField(choices=[(1, 'Lizard'), (2, 'Snake'), (3, 'WormLizard'), (4, 'Rodent')], default=ark.utils.SubOrders['Snake'])),
+                ('suborder',
+                 models.IntegerField(choices=[(1, 'Lizard'), (2, 'Snake'), (3, 'WormLizard'), (4, 'Rodent')],
+                                     default=ark.utils.SubOrders['Snake'])),
             ],
             options={
                 'ordering': ['-name'],
@@ -41,13 +42,16 @@ class Migration(migrations.Migration):
                 ('picture', models.ImageField(blank=True, upload_to='ark/img/animals/')),
                 ('notes', models.TextField(blank=True)),
                 ('birth_date', models.DateField(auto_now_add=True)),
-                ('gender', models.PositiveSmallIntegerField(choices=[(1, 'Male'), (2, 'Female')], default=ark.utils.Gender['Male'])),
+                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], default='M', max_length=2)),
                 ('captive_bred', models.BooleanField(default=True)),
                 ('weight', models.IntegerField(default=0, help_text='Weight of the animal in grams.')),
                 ('size', models.IntegerField(default=0, help_text='Size of the animal, height or length, in mm.')),
-                ('origin', models.CharField(blank=True, help_text='In what country was the animal born.', max_length=100)),
-                ('identification_number', models.CharField(blank=True, help_text='i-fap or other identification register.', max_length=255)),
-                ('dossier', models.ManyToManyField(blank=True, help_text='Any kinds of papers of the animal.', to='ark.file')),
+                ('origin',
+                 models.CharField(blank=True, help_text='In what country was the animal born.', max_length=100)),
+                ('identification_number',
+                 models.CharField(blank=True, help_text='i-fap or other identification register.', max_length=255)),
+                ('dossier',
+                 models.ManyToManyField(blank=True, help_text='Any kinds of papers of the animal.', to='ark.file')),
                 ('species', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ark.species')),
             ],
         ),

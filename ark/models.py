@@ -1,10 +1,9 @@
 from django.db import models
 from django.urls import reverse
-from .utils import SubOrders, Gender
+from .utils import SubOrders
 
 
 class Species(models.Model):
-
     name = models.CharField(
         max_length=150, help_text='Enter the name of the species')
     suborder = models.IntegerField(
@@ -24,6 +23,9 @@ class File(models.Model):
 
 
 class Animal(models.Model):
+    class Gender(models.TextChoices):
+        MALE = "M",
+        FEMALE = "F"
 
     name = models.CharField(max_length=200, blank=True,
                             help_text='Give your animal a name.')
@@ -31,8 +33,9 @@ class Animal(models.Model):
     picture = models.ImageField(upload_to='ark/img/animals/', blank=True)
     notes = models.TextField(blank=True)
     birth_date = models.DateField(auto_now_add=True)
-    gender = models.PositiveSmallIntegerField(
-        choices=Gender.choices(), default=Gender.Male)
+    gender = models.CharField(
+        max_length=2,
+        choices=Gender.choices, default=Gender.MALE)
     captive_bred = models.BooleanField(default=True)
     weight = models.IntegerField(
         default=0, help_text='Weight of the animal in grams.')

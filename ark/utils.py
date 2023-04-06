@@ -10,12 +10,3 @@ class SubOrders(IntEnum):
     @classmethod
     def choices(cls):
         return [(key.value, key.name) for key in cls]
-
-
-class Gender(IntEnum):
-    Male = 1
-    Female = 2
-
-    @classmethod
-    def choices(cls):
-        return [(key.value, key.name) for key in cls]
