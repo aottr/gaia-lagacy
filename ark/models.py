@@ -47,3 +47,6 @@ class Animal(models.Model):
         max_length=255, blank=True, help_text='i-fap or other identification register.')
     dossier = models.ManyToManyField(
         File, blank=True, help_text='Any kinds of papers of the animal.')
+
+    def __str__(self):
+        return f"{self.name} - {self.species.name}"
