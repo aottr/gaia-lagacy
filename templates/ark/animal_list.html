@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="text-3xl mb-6">Animals</h1>
+    <a href="/ark/animals"><h1 class="text-3xl mb-6">Animals</h1></a>
     {% for animal in object_list %}
         <div class="card compact card-side bg-base-100 shadow-xl mb-4">
             {% if animal.picture %}
